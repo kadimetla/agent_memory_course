@@ -15,7 +15,8 @@ filesystem fallback.
 | 4 | **Procedural** | `#/procedural` | Tools + a recalled `WORKFLOW_MEMORY` runbook + first-class, lifecycle-aware `SKILLBOX` retrieval. |
 | 5 | **Coordination** | `#/coordination` | `SHARED_MEMORY`: a lead + Researcher + Reviewer collaborating, via `MultiAgentOrchestrator`. |
 
-A persistent, resizable **Data Explorer** sits at the bottom of every page. It
+A prominent **Memory Data Explorer** panel on the overview opens the persistent,
+resizable explorer that sits at the bottom of every page. It
 browses the MemoRizz-owned tables in the active `MEMORIZZ` schema, shows real
 columns, primary keys and paginated rows, summarizes VECTOR and large LOB cells,
 and highlights memory reads and writes through a live SSE activity rail. Oracle's

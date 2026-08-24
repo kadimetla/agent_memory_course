@@ -354,6 +354,23 @@ textarea::placeholder, input::placeholder { color: var(--text-3); }
 .hero h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent); }
 .hero p { font-size: 17px; color: var(--text-2); max-width: 58ch; }
 
+.home-explorer {
+  display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 18px; align-items: center;
+  margin: -18px 0 32px; padding: 20px 22px; overflow: hidden; position: relative;
+  border: 1px solid color-mix(in oklab, var(--r2) 35%, var(--line)); border-radius: var(--radius);
+  background: linear-gradient(115deg, color-mix(in oklab, var(--r2) 10%, var(--panel)), var(--panel) 58%);
+  box-shadow: var(--shadow);
+}
+.home-explorer::after { content:""; position:absolute; width:190px; height:190px; right:-90px; bottom:-140px; border-radius:50%; background:color-mix(in oklab,var(--r2) 12%,transparent); pointer-events:none; }
+.home-explorer-mark { width:54px; height:54px; display:grid; place-items:center; border-radius:14px; color:var(--r2); background:color-mix(in oklab,var(--r2) 13%,var(--panel)); border:1px solid color-mix(in oklab,var(--r2) 30%,transparent); }
+.home-explorer-mark svg { width:26px; height:26px; }
+.home-explorer-copy { min-width:0; }
+.home-explorer-kicker { margin-bottom:3px; color:var(--r2); font:600 9px var(--font-mono); letter-spacing:.12em; text-transform:uppercase; }
+.home-explorer h2 { margin:0 0 4px; font-size:19px; }
+.home-explorer p { margin:0; max-width:70ch; color:var(--text-2); font-size:13px; }
+.home-explorer-summary { margin-top:8px; color:var(--text-3); font:10px var(--font-mono); }
+.home-explorer .btn { position:relative; z-index:1; white-space:nowrap; }
+
 .ladder { display: flex; flex-direction: column; gap: 14px; position: relative; }
 .rung {
   --c: var(--accent);
@@ -382,6 +399,8 @@ textarea::placeholder, input::placeholder { color: var(--text-3); }
 .rung-go { color: var(--c); opacity: 0; transform: translateX(-6px); transition: all 0.28s var(--ease); }
 .rung:hover .rung-go { opacity: 1; transform: none; }
 @media (max-width: 820px) {
+  .home-explorer { grid-template-columns:48px minmax(0,1fr); margin-top:-24px; }
+  .home-explorer .btn { grid-column:1 / -1; width:100%; }
   .rung { grid-template-columns: 64px 1fr; gap: 16px; padding: 18px; }
   .rung-meta, .rung-go { display: none; }
   .rung-num { font-size: 54px; }

@@ -268,7 +268,19 @@ function viewHome() {
       <h1>Grow an agent from a goldfish into a colleague — <em>one memory layer at a time</em>.</h1>
       <p>One copilot — <b>Memo</b>, for a fictional <b>Acme Cloud</b> platform team — built up across five layers of memory with the <b>memorizz</b> framework on <b>Oracle AI Database</b> (with a filesystem fallback). Each layer adds exactly one capability the layer below was missing.</p>
     </section>
+    <section class="home-explorer" aria-labelledby="home-explorer-title">
+      <div class="home-explorer-mark">${I.db}</div>
+      <div class="home-explorer-copy">
+        <div class="home-explorer-kicker">Live memory storage</div>
+        <h2 id="home-explorer-title">Memory Data Explorer</h2>
+        <p>Inspect the allowlisted MemoRizz tables, their columns, scoped rows, and live read/write activity in the active memory provider.</p>
+        <div class="home-explorer-summary" id="home-explorer-summary">${esc($("#explorer-summary")?.textContent || "Connecting to the application database…")}</div>
+      </div>
+      <button class="btn btn-accent" id="home-explorer-open" type="button">${I.db} Open Data Explorer</button>
+    </section>
     <div class="ladder">${rungs}</div>`, "var(--r5)");
+
+  $("#home-explorer-open").addEventListener("click", () => toggleExplorer(true));
 }
 
 // ── view: conversation (Layer 1) ─────────────────────────────────────────
@@ -862,8 +874,11 @@ async function loadExplorerCatalog() {
     const payload = await explorerJSON("/api/data_explorer/tables");
     explorerState.tables = payload.tables || [];
     const totalRows = explorerState.tables.reduce((total, table) => total + Math.max(0, table.row_count), 0);
-    $("#explorer-summary").textContent =
+    const summary =
       `${explorerState.tables.length} tables · ${totalRows.toLocaleString()} rows · ${payload.backend}${payload.schema ? ` · ${payload.schema}` : ""}`;
+    $("#explorer-summary").textContent = summary;
+    const homeSummary = $("#home-explorer-summary");
+    if (homeSummary) homeSummary.textContent = summary;
     renderExplorerTables();
     const stillAvailable = explorerState.tables.some((table) => table.name === explorerState.selected);
     if (!stillAvailable) {
@@ -874,6 +889,8 @@ async function loadExplorerCatalog() {
     }
   } catch (error) {
     $("#explorer-summary").textContent = error.message;
+    const homeSummary = $("#home-explorer-summary");
+    if (homeSummary) homeSummary.textContent = error.message;
     $("#explorer-grid").innerHTML = `<div class="explorer-error">${esc(error.message)}</div>`;
   } finally {
     refresh.disabled = false;
