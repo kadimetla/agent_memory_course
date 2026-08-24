@@ -1,0 +1,10 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated autonomous-agent state
+backend/automations/
+backend/sandbox/

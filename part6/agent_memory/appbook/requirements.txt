@@ -1,0 +1,12 @@
+# Backend for the Agent Memory Stack app.
+# Powered by memorizz (the framework taught in the companion notebook).
+fastapi>=0.110
+uvicorn>=0.27
+sse-starlette>=2.0
+python-dotenv>=1.0
+
+# Pin this course module to the MemoRizz 0.6 API surface. The filesystem
+# provider ships in the base package; [oracle] adds the optional DB driver.
+memorizz[oracle]>=0.6.0,<0.7.0
+openai>=2.24               # gpt-5.6-luna + text-embedding-3-small
+oracledb>=3.4              # optional — filesystem exact search is the fallback
